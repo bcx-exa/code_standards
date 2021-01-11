@@ -14,14 +14,14 @@ Folder Structure
 |  /src/services   |                   App Logic                   |
 |      /tests      |                App Unit Tests                 |
 
-- env.local - where you store keys
+<!-- - env.local - where you store keys
 - env.dev.local
 - env.uat.local
 - env.prod.local
 - env
 - env.dev
 - env.uat
-- env.prod
+- env.prod -->
 
 - Wrap common utilities as npm packages
 
@@ -136,17 +136,6 @@ import foo from './foo';
 - Prefixing your comments with FIXME or TODO helps other developers quickly understand if you’re pointing out a problem that needs to be revisited, or if you’re suggesting a solution to the problem that needs to be implemented.
 
 - Use // FIXME: to annotate problems.
-
-  ```
-    class Calculator extends Abacus {
-    constructor() {
-    super();
-        // FIXME: shouldn’t use a global here
-        total = 0;
-    }
-    }
-  ```
-
 - Use // TODO: to annotate solutions to problems.
 
   ```
@@ -154,6 +143,7 @@ import foo from './foo';
     constructor() {
     super();
         // TODO: total should be configurable by an options param
+        // FIXME: shouldn’t use a global here
         this.total = 0;
     }
     }
