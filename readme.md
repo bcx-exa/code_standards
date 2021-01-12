@@ -6,35 +6,67 @@ Folder Structure
 | :-------------------: | :------------------------------------------------------------------------------------------------------------------------------------: |
 |         /docs         |                                                        Documentation goes here                                                         |
 |         /env          |                                                      Enviroment config goes here                                                       |
-|       /env/.env       |                                      varibles that are shared across all enviroments. ie app name                                      |
-|    /env/.env.{env}    |                          varibles that are not a secret. ie location of s3 bucket, url to other mircoservice                           |
+|       /env/.env       |                                     variables that are shared across all enviroments. ie app name                                      |
+|    /env/.env.{env}    |                          variables that are not a secret. ie location of s3 bucket, url to other mircoservice                          |
 | /env/.env.{env}.local | [***Don't Checked In***:no_entry_sign:] Where you store local secret keys. ie Database Password, AWS Credentials for local development |
 |         /iac          |                                  All files used in Infrasturce as code and CICD pipeline goes in here                                  |
 |         /src          |                                                              backend code                                                              |
 |   /src/controllers    |                                                           Rest API Endpoints                                                           |
 |     /src/helpers      |                                                            Helper functions                                                            |
+|       /src/jobs       |                                                               Cron Jobs                                                                |
 |      /src/models      |                                                            Database Models                                                             |
 |      /src/types       |                                                           non database types                                                           |
 |     /src/services     |                                                               App Logic                                                                |
 |        /tests         |                                                             App Unit Tests                                                             |
 
-- Wrap common utilities as npm packages
+## General
 
-- Database needs a deleted flagged
+- Wrap common utilities into the bcx shared libary npm package, ie encrytion,database connections
 
-- Types should there for every varible
+## Database Models
+
+- Needs to have
+
+  - uuid
+  - dateCreated
+  - dateModified
+  - isDeleted
+
+  ```
+  @Entity({ name: !TableName! })
+  export class !TableName! {
+      @PrimaryGeneratedColumn("uuid")
+      uuid: string;
+
+      @Column("date")
+      dateCreated: string;
+
+      @Column("date")
+      dateModified: string;
+
+      @Column("boolean")
+      isDeleted: boolean;
+  }
+  ```
+
+- Database record should never be deleted, only flagged as deleted (use the isDeleted Field), exceptions are allowed but needs to be discussed.
+
+- There should types for every variable created.
 
   ```
   // bad
-  let var = 0;
-  var = "String" //will throw and error
+  let foo = 0;
+  foo = "String" //will throw only on complie time
 
   // good
-  let bar: number = 0;
-  let foo: string = "String";
+  let foo: number = 0;
+  foo = "String" //will throw in editor
   ```
 
-- Use naming conventions
+## Naming conventions
+
+- Use descriptive names, but try to keep them short.
+- Prefer const over let. no var
 
   - lowerCamelCase when naming constants, variables, and functions
     ```
@@ -45,35 +77,39 @@ Folder Structure
     ```
     class SomeClassExample {}
     ```
-  - Use descriptive names, but try to keep them short.
-
-- Prefer const over let. no var
 
 - No unused variables.
 
 - Commas must be placed at the end of the current line.
 
   ```
-    var obj = {
+    const obj = {
       foo: 'foo'
       ,bar: 'bar'   // ✗ avoid
     }
 
-    var obj = {
+    const obj = {
       foo: 'foo',
-      bar: 'bar'   // ✓ ok
+      bar: 'bar',   // ✓ ok
     }
-
   ```
+
+- commas need to be at the end of a object/array
+
+```
+
+```
 
 - Dot should be on the same line as property.
 
   ```
-    console.
-      log('hello')  // ✗ avoid
+  const advert = await advert_details. // ✗ avoid
+      createQueryBuilder('adSubmitted'). // ✗ avoid
+      select() // ✗ avoid
 
-    console
-      .log('hello') // ✓ ok
+  const advert = await advert_details // ✓ ok
+      .createQueryBuilder('adSubmitted') // ✓ ok
+      .select() // ✓ ok
   ```
 
 - Require or import statements at the beginning of each file, before and outside of any functions.
@@ -81,21 +117,42 @@ Folder Structure
 - Distinguish operational vs programmer errors
   Operational errors (e.g. API received an invalid input) refer to known cases where the error impact is fully understood and can be handled thoughtfully. On the other hand, programmer error (e.g. trying to read an undefined variable) refers to unknown code failures that dictate to gracefully restart the application.
 
+  ```
+  async function getUser(userID) {
+    try{
+
+      const repository = connection.getRepository(User);
+      const userData = await repository.find(userID);
+
+      if(!userData) return new NotFound("Unable to find user");
+
+      if(!userData.isProducer) return new BadRequest("The logged in user is not a producer");
+
+      ......
+
+      return new SuccessResponse("Got user",userData);
+
+    }catch (e) {
+      throw new InternalServerError("Throw Error",e)
+    }
+  }
+  ```
+
 - Use array spreads ... to copy arrays.
 
-  ```
-  // bad
-  const len = items.length;
-  const itemsCopy = [];
-  let i;
+```
+// bad
+const len = items.length;
+const itemsCopy = [];
+let i;
 
-  for (i = 0; i < len; i += 1) {
-    itemsCopy[i] = items[i];
-  }
+for (i = 0; i < len; i += 1) {
+itemsCopy[i] = items[i];
+}
 
-  // good
-  const itemsCopy = [...items];
-  ```
+// good
+const itemsCopy = [...items];
+```
 
 - Do not include JavaScript filename extensions eslint: import/extensions
 
@@ -109,26 +166,35 @@ import foo from './foo';
 
 - Start a Codeblock’s Curly Braces on the Same Line
 
-  ```
-  Code Example
-  // Do
-  function someFunction() {
-    // code block
-  }
+```
+Code Example
+// Do
+function someFunction() {
+// code block
+}
 
-  // Avoid
-  function someFunction()
-  {
-    // code block
-  }
-  ```
+// Avoid
+function someFunction()
+{
+// code block
+}
+```
 
 - Use the === operator
   Prefer the strict equality operator === over the weaker abstract equality operator ==. == will compare two variables after converting them to a common type. There is no type conversion in ===, and both variables must be of the same type to be equal.
 
+```
+
+```
+
 - Use Async Await, avoid callbacks
 
-- Be stateless – Save no data locally on a specific web server (see separate bullet – ‘Be Stateless’)
+```
+TODO: add example
+
+```
+
+- Be stateless – Save no data locally on a specific web server
 
 - Extract secrets from enviroment local file then when deployed from the parameter store
 
@@ -136,66 +202,26 @@ import foo from './foo';
 
 - Guard Rails
 
-  ```
-  if(!consumer) return new BadRequest('No conumser found')
-  if(!consumer) return new InternalServerError('No consumer found')
-  ```
+```
 
-  ```
-  try{
+if(!consumer) return new BadRequest('No conumser found')
+if(!consumer) return new InternalServerError('No consumer found')
 
-  } catch(){
 
-  }
-  ```
+try{
 
-- Return Types
+} catch(e){
 
-  ```
-  SuccessResponse = {
-    statusCode: 200,
-    name: 'String',
-    message: 'String',
-    data: {},
-  }
-  BadRequest = {
-    statusCode: 400,
-    name: 'String',
-    message: 'String',
-    data: {},
-  }
-  NotFound = {
-    statusCode: 404,
-    name: 'String',
-    message: 'String',
-    data: {},
-    }
-  InternalServerError = {
-    statusCode: 500,
-    name: 'String',
-    message: 'String',
-    data: {},
-  }
-  DbConnectionError = {
-    statusCode: 500,
-    name: 'String',
-    message: 'String',
-    data: {},
-  }
-  Unauthorized = {
-    statusCode: 404,
-    name: 'String',
-    message: 'String',
-    data: {},
-  }
-  ```
+}
+
+```
 
 - Code should be well documented
   The code should be properly commented for understanding easily. Comments regarding the statements increase the understandability of the code.
 
 - Prefixing your comments with FIXME or TODO helps other developers quickly understand if you’re pointing out a problem that needs to be revisited, or if you’re suggesting a solution to the problem that needs to be implemented.
 
-  ```
+```
     class Calculator extends Abacus {
     constructor() {
     super();
@@ -204,4 +230,4 @@ import foo from './foo';
         this.total = 0;
     }
     }
-  ```
+```
