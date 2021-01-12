@@ -2,26 +2,20 @@
 
 Folder Structure
 
-|      Folder      |                  Description                  |
-| :--------------: | :-------------------------------------------: |
-|      /docs       |            Documentation goes here            |
-|       /env       |          Enviroment config goes here          |
-|      /cicd       | All files used in CI/CD pipeline goes in here |
-|       /src       |                 backend code                  |
-| /src/controllers |                 API Endpoints                 |
-|   /src/models    |                Database Models                |
-|    /src/types    |              non database types               |
-|  /src/services   |                   App Logic                   |
-|      /tests      |                App Unit Tests                 |
-
-<!-- - env.local - where you store keys
-- env.dev.local
-- env.uat.local
-- env.prod.local
-- env
-- env.dev
-- env.uat
-- env.prod -->
+|      Folder/File      |                                                  Description                                                  |
+| :-------------------: | :-----------------------------------------------------------------------------------------------------------: |
+|         /docs         |                                            Documentation goes here                                            |
+|         /env          |                                          Enviroment config goes here                                          |
+|       /env/.env       |                         varibles that are shared across all enviroments. ie app name                          |
+|    /env/.env.{env}    |              varibles that are not a secret. ie location of s3 bucket, url to other mircoservice              |
+| /env/.env.{env}.local | [***Not Checked In***:no_entry_sign:] Where you store local secret keys. ie Database Password, AWS Creditials |
+|         /iac          |                          All files used in Infrasturce as code pipeline goes in here                          |
+|         /src          |                                                 backend code                                                  |
+|   /src/controllers    |                                                 API Endpoints                                                 |
+|      /src/models      |                                                Database Models                                                |
+|      /src/types       |                                              non database types                                               |
+|     /src/services     |                                                   App Logic                                                   |
+|        /tests         |                                                App Unit Tests                                                 |
 
 - Wrap common utilities as npm packages
 
@@ -134,9 +128,6 @@ import foo from './foo';
   The code should be properly commented for understanding easily. Comments regarding the statements increase the understandability of the code.
 
 - Prefixing your comments with FIXME or TODO helps other developers quickly understand if you’re pointing out a problem that needs to be revisited, or if you’re suggesting a solution to the problem that needs to be implemented.
-
-- Use // FIXME: to annotate problems.
-- Use // TODO: to annotate solutions to problems.
 
   ```
     class Calculator extends Abacus {
