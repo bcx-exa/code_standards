@@ -20,6 +20,20 @@ Folder Structure
 
 - Wrap common utilities as npm packages
 
+- Database needs a deleted flagged
+
+- Types should there for every varible
+
+  ```
+  // bad
+  let var = 0;
+  var = "String" //will throw and error
+
+  // good
+  let bar: number = 0;
+  let foo: string = "String";
+  ```
+
 - Use naming conventions
 
   - lowerCamelCase when naming constants, variables, and functions
