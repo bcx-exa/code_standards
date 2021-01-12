@@ -1,6 +1,6 @@
 # Backend API - Code Standards
 
-Folder Structure
+## Backend Folder Structure
 
 |      Folder/File      |                                                              Description                                                               |
 | :-------------------: | :------------------------------------------------------------------------------------------------------------------------------------: |
@@ -22,6 +22,68 @@ Folder Structure
 ## General
 
 - Wrap common utilities into the bcx shared libary npm package, ie encrytion,database connections
+
+- Code should be well documented
+  The code should be properly commented for understanding easily. Comments regarding the statements increase the understandability of the code.
+
+- No unused variables.
+
+- Require or import statements at the beginning of each file, before and outside of any functions.
+
+- Commas must be placed at the end of the current line.
+
+  ```
+    const obj = {
+      foo: 'foo'
+      ,bar: 'bar'   // ✗ avoid
+    }
+
+    const obj = {
+      foo: 'foo',
+      bar: 'bar',   // ✓ ok
+    }
+  ```
+
+- Trailing commas need to be at the end of a object/array
+
+  ```
+  const godzilla = {
+    teeth: 213,
+    kind: 'giant monster' // <- no comma before the closing brace // ✗ avoid
+  };
+
+  const godzilla = {
+    teeth: 213,
+    kind: 'giant monster', // <- comma before the closing brace // ✓ ok
+  };
+  ```
+
+- Dot should be on the same line as property.
+
+  ```
+  const advert = await advert_details. // ✗ avoid
+      createQueryBuilder('adSubmitted'). // ✗ avoid
+      select() // ✗ avoid
+
+  const advert = await advert_details // ✓ ok
+      .createQueryBuilder('adSubmitted') // ✓ ok
+      .select() // ✓ ok
+  ```
+
+### Naming conventions
+
+- Use descriptive names, but try to keep them short.
+- Prefer const over let. no var
+
+  - lowerCamelCase when naming constants, variables, and functions
+    ```
+    let someVariableExample = 'value';
+    function doSomething() {}
+    ```
+  - UpperCamelCase (capital first letter as well) when naming classes.
+    ```
+    class SomeClassExample {}
+    ```
 
 ## Database Models
 
@@ -62,57 +124,6 @@ Folder Structure
   let foo: number = 0;
   foo = "String" //will throw in editor
   ```
-
-## Naming conventions
-
-- Use descriptive names, but try to keep them short.
-- Prefer const over let. no var
-
-  - lowerCamelCase when naming constants, variables, and functions
-    ```
-    let someVariableExample = 'value';
-    function doSomething() {}
-    ```
-  - UpperCamelCase (capital first letter as well) when naming classes.
-    ```
-    class SomeClassExample {}
-    ```
-
-- No unused variables.
-
-- Commas must be placed at the end of the current line.
-
-  ```
-    const obj = {
-      foo: 'foo'
-      ,bar: 'bar'   // ✗ avoid
-    }
-
-    const obj = {
-      foo: 'foo',
-      bar: 'bar',   // ✓ ok
-    }
-  ```
-
-- commas need to be at the end of a object/array
-
-```
-
-```
-
-- Dot should be on the same line as property.
-
-  ```
-  const advert = await advert_details. // ✗ avoid
-      createQueryBuilder('adSubmitted'). // ✗ avoid
-      select() // ✗ avoid
-
-  const advert = await advert_details // ✓ ok
-      .createQueryBuilder('adSubmitted') // ✓ ok
-      .select() // ✓ ok
-  ```
-
-- Require or import statements at the beginning of each file, before and outside of any functions.
 
 - Distinguish operational vs programmer errors
   Operational errors (e.g. API received an invalid input) refer to known cases where the error impact is fully understood and can be handled thoughtfully. On the other hand, programmer error (e.g. trying to read an undefined variable) refers to unknown code failures that dictate to gracefully restart the application.
@@ -163,6 +174,8 @@ import foo from './foo.js';
 // good
 import foo from './foo';
 ```
+
+## Style Guide
 
 - Start a Codeblock’s Curly Braces on the Same Line
 
@@ -215,9 +228,6 @@ try{
 }
 
 ```
-
-- Code should be well documented
-  The code should be properly commented for understanding easily. Comments regarding the statements increase the understandability of the code.
 
 - Prefixing your comments with FIXME or TODO helps other developers quickly understand if you’re pointing out a problem that needs to be revisited, or if you’re suggesting a solution to the problem that needs to be implemented.
 
