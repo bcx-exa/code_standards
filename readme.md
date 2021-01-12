@@ -2,20 +2,21 @@
 
 Folder Structure
 
-|      Folder/File      |                                                  Description                                                  |
-| :-------------------: | :-----------------------------------------------------------------------------------------------------------: |
-|         /docs         |                                            Documentation goes here                                            |
-|         /env          |                                          Enviroment config goes here                                          |
-|       /env/.env       |                         varibles that are shared across all enviroments. ie app name                          |
-|    /env/.env.{env}    |              varibles that are not a secret. ie location of s3 bucket, url to other mircoservice              |
-| /env/.env.{env}.local | [***Not Checked In***:no_entry_sign:] Where you store local secret keys. ie Database Password, AWS Creditials |
-|         /iac          |                          All files used in Infrasturce as code pipeline goes in here                          |
-|         /src          |                                                 backend code                                                  |
-|   /src/controllers    |                                                 API Endpoints                                                 |
-|      /src/models      |                                                Database Models                                                |
-|      /src/types       |                                              non database types                                               |
-|     /src/services     |                                                   App Logic                                                   |
-|        /tests         |                                                App Unit Tests                                                 |
+|      Folder/File      |                                                              Description                                                               |
+| :-------------------: | :------------------------------------------------------------------------------------------------------------------------------------: |
+|         /docs         |                                                        Documentation goes here                                                         |
+|         /env          |                                                      Enviroment config goes here                                                       |
+|       /env/.env       |                                      varibles that are shared across all enviroments. ie app name                                      |
+|    /env/.env.{env}    |                          varibles that are not a secret. ie location of s3 bucket, url to other mircoservice                           |
+| /env/.env.{env}.local | [***Don't Checked In***:no_entry_sign:] Where you store local secret keys. ie Database Password, AWS Credentials for local development |
+|         /iac          |                                  All files used in Infrasturce as code and CICD pipeline goes in here                                  |
+|         /src          |                                                              backend code                                                              |
+|   /src/controllers    |                                                           Rest API Endpoints                                                           |
+|     /src/helpers      |                                                            Helper functions                                                            |
+|      /src/models      |                                                            Database Models                                                             |
+|      /src/types       |                                                           non database types                                                           |
+|     /src/services     |                                                               App Logic                                                                |
+|        /tests         |                                                             App Unit Tests                                                             |
 
 - Wrap common utilities as npm packages
 
@@ -33,6 +34,33 @@ Folder Structure
   - Use descriptive names, but try to keep them short.
 
 - Prefer const over let. no var
+
+- No unused variables.
+
+- Commas must be placed at the end of the current line.
+
+  ```
+    var obj = {
+      foo: 'foo'
+      ,bar: 'bar'   // ✗ avoid
+    }
+
+    var obj = {
+      foo: 'foo',
+      bar: 'bar'   // ✓ ok
+    }
+
+  ```
+
+- Dot should be on the same line as property.
+
+  ```
+    console.
+      log('hello')  // ✗ avoid
+
+    console
+      .log('hello') // ✓ ok
+  ```
 
 - Require or import statements at the beginning of each file, before and outside of any functions.
 
@@ -116,12 +144,36 @@ import foo from './foo';
     message: 'String',
     data: {},
   }
-  BadRequest
-  NotFound
-  InternalServerError
-  Success
-  DbConnectionError
-  Unauthorized
+  BadRequest = {
+    statusCode: 400,
+    name: 'String',
+    message: 'String',
+    data: {},
+  }
+  NotFound = {
+    statusCode: 404,
+    name: 'String',
+    message: 'String',
+    data: {},
+    }
+  InternalServerError = {
+    statusCode: 500,
+    name: 'String',
+    message: 'String',
+    data: {},
+  }
+  DbConnectionError = {
+    statusCode: 500,
+    name: 'String',
+    message: 'String',
+    data: {},
+  }
+  Unauthorized = {
+    statusCode: 404,
+    name: 'String',
+    message: 'String',
+    data: {},
+  }
   ```
 
 - Code should be well documented
