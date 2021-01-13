@@ -97,17 +97,17 @@
   ```
   @Entity({ name: !TableName! })
   export class !TableName! {
-      @PrimaryGeneratedColumn("uuid")
-      uuid: string;
+    @PrimaryGeneratedColumn("uuid")
+    uuid: string;
 
-      @Column("date")
-      dateCreated: string;
+    @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
+    dateCreated: string;
 
-      @Column("date")
-      dateModified: string;
+    @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
+    dateModified: string;
 
-      @Column("boolean")
-      isDeleted: boolean;
+    @Column({ type: "boolean", default: () => false })
+    isDeleted: boolean;
   }
   ```
 
