@@ -197,6 +197,9 @@ function someFunction()
   Prefer the strict equality operator === over the weaker abstract equality operator ==. == will compare two variables after converting them to a common type. There is no type conversion in ===, and both variables must be of the same type to be equal.
 
 ```
+4 == "4" // will return true // ✗ avoid
+
+4 === "4" // will return false // ✓ ok
 
 ```
 
