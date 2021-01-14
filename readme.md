@@ -112,7 +112,22 @@
   ```
 
 - Database record should never be deleted, only flagged as deleted (use the isDeleted Field), exceptions are allowed but needs to be discussed.
+  ```
+    try {
+      const connect = await auroraConnectApi(databases);
+      const bundle = await connect.getRepository(dataBundles);
 
+      const advert = await bundle.findOne({ id: _bundleId })
+      if (!advert) return new NotFound('Bundle does not Exists');
+
+      advert.isDeleted = true;
+      await bundle.save(advert);
+      return new SuccessResponse("Bundle Deleted Successfully");
+    } catch (e) {
+      return new InternalServerError("Throw Error" + e, e)
+    }
+
+  ```
 - There should types for every variable created.
 
   ```
