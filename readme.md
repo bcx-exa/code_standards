@@ -115,6 +115,32 @@ try{
     }
   }
 ```
+
+- Distinguish operational vs programmer errors
+  Operational errors (e.g. API received an invalid input) refer to known cases where the error impact is fully understood and can be handled thoughtfully. On the other hand, programmer error (e.g. trying to read an undefined variable) refers to unknown code failures that dictate to gracefully restart the application.
+
+  ```
+  async function getUser(userID) {
+    try{
+
+      const repository = connection.getRepository(User);
+      const userData = await repository.find(userID);
+
+      if(!userData) return new NotFound("Unable to find user");
+
+      if(!userData.isProducer) return new BadRequest("The logged in user is not a producer");
+
+      ......
+
+      return new SuccessResponse("Got user",userData);
+
+    }catch (e) {
+      throw new InternalServerError("Throw Error",e)
+    }
+  }
+  ```
+
+
 ## Style Guide
 
 - Start a Codeblock’s Curly Braces on the Same Line
@@ -230,29 +256,5 @@ try{
       return new InternalServerError("Throw Error" + e, e)
     }
 
-  ```
-
-- Distinguish operational vs programmer errors
-  Operational errors (e.g. API received an invalid input) refer to known cases where the error impact is fully understood and can be handled thoughtfully. On the other hand, programmer error (e.g. trying to read an undefined variable) refers to unknown code failures that dictate to gracefully restart the application.
-
-  ```
-  async function getUser(userID) {
-    try{
-
-      const repository = connection.getRepository(User);
-      const userData = await repository.find(userID);
-
-      if(!userData) return new NotFound("Unable to find user");
-
-      if(!userData.isProducer) return new BadRequest("The logged in user is not a producer");
-
-      ......
-
-      return new SuccessResponse("Got user",userData);
-
-    }catch (e) {
-      throw new InternalServerError("Throw Error",e)
-    }
-  }
   ```
 
