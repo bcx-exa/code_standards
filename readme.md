@@ -89,7 +89,12 @@ TODO: add example
 
 - Extract secrets from enviroment local file then when deployed from the parameter store
 
-- No console.logs
+- No console.logs, use the bcx logger
+  ```
+  console.log("Date today", Date.now()); // ✗ avoid
+
+  logger.debug("Date today", Date.now()) // ✓ ok
+  ```
 
 - Guard Rails
 
