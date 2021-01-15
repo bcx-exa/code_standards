@@ -80,10 +80,10 @@
 
 - Use Async Await, avoid callbacks
 
-```
-TODO: add example
+  ```
+  TODO: add example
 
-```
+  ```
 
 - Be stateless – Save no data locally on a specific web server
 
@@ -98,28 +98,28 @@ TODO: add example
 
 - Guard Rails
 
-```
-if(!consumer) return new BadRequest('No conumser found')
-if(!consumer) return new InternalServerError('No consumer found')
-try{
+  ```
+  if(!consumer) return new BadRequest('No conumser found')
+  if(!consumer) return new InternalServerError('No consumer found')
+  try{
 
-} catch(e){
+  } catch(e){
 
-}
-```
+  }
+  ```
 
 - Prefixing your comments with FIXME or TODO helps other developers quickly understand if you’re pointing out a problem that needs to be revisited, or if you’re suggesting a solution to the problem that needs to be implemented.
 
-```
-  class Calculator extends Abacus {
-    constructor() {
-    super();
-        // TODO: total should be configurable by an options param
-        // FIXME: shouldn’t use a global here
-        this.total = 0;
+  ```
+    class Calculator extends Abacus {
+      constructor() {
+      super();
+          // TODO: total should be configurable by an options param
+          // FIXME: shouldn’t use a global here
+          this.total = 0;
+      }
     }
-  }
-```
+  ```
 
 - Distinguish operational vs programmer errors
   Operational errors (e.g. API received an invalid input) refer to known cases where the error impact is fully understood and can be handled thoughtfully. On the other hand, programmer error (e.g. trying to read an undefined variable) refers to unknown code failures that dictate to gracefully restart the application.
@@ -218,7 +218,15 @@ try{
     ```
     class SomeClassExample {}
     ```
+    
+  - Enviroment Varibles, to be all catipal with underscores seperating words
+    ```
+    stage=dev // ✗ avoid
+    nodeEnv=dev // ✗ avoid
 
+    STAGE=dev // ✓ ok
+    NODE_ENV=dev // ✓ ok
+    ```
 ## Database Models
 
 - Needs to have
