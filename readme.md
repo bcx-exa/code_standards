@@ -89,6 +89,8 @@
 
 - Extract secrets from enviroment local file then when deployed from the parameter store
 
+- Try to keep methods functions short, split into seperate methods.
+
 - No console.logs, use the bcx logger
   ```
   console.log("Date today", Date.now()); // ✗ avoid
