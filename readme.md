@@ -44,39 +44,39 @@
 
 - Use array spreads ... to copy arrays.
 
-```
-// bad
-const len = items.length;
-const itemsCopy = [];
-let i;
+  ```
+  // bad
+  const len = items.length;
+  const itemsCopy = [];
+  let i;
 
-for (i = 0; i < len; i += 1) {
-itemsCopy[i] = items[i];
-}
+  for (i = 0; i < len; i += 1) {
+  itemsCopy[i] = items[i];
+  }
 
-// good
-const itemsCopy = [...items];
-```
+  // good
+  const itemsCopy = [...items];
+  ```
 
 - Do not include JavaScript filename extensions eslint: import/extensions
 
-```
-// bad
-import foo from './foo.js';
+  ```
+  // bad
+  import foo from './foo.js';
 
-// good
-import foo from './foo';
-```
+  // good
+  import foo from './foo';
+  ```
 
 - Use the === operator
   Prefer the strict equality operator === over the weaker abstract equality operator ==. == will compare two variables after converting them to a common type. There is no type conversion in ===, and both variables must be of the same type to be equal.
 
-```
-4 == "4" // will return true // ✗ avoid
+  ```
+  4 == "4" // will return true // ✗ avoid
 
-4 === "4" // will return false // ✓ ok
+  4 === "4" // will return false // ✓ ok
 
-```
+  ```
 
 - Use Async Await, avoid callbacks
 
@@ -94,49 +94,43 @@ TODO: add example
 - Guard Rails
 
 ```
-
 if(!consumer) return new BadRequest('No conumser found')
 if(!consumer) return new InternalServerError('No consumer found')
-
-
 try{
 
 } catch(e){
 
 }
-
 ```
-
 
 - Prefixing your comments with FIXME or TODO helps other developers quickly understand if you’re pointing out a problem that needs to be revisited, or if you’re suggesting a solution to the problem that needs to be implemented.
 
 ```
-    class Calculator extends Abacus {
+  class Calculator extends Abacus {
     constructor() {
     super();
         // TODO: total should be configurable by an options param
         // FIXME: shouldn’t use a global here
         this.total = 0;
     }
-    }
+  }
 ```
 ## Style Guide
 
 - Start a Codeblock’s Curly Braces on the Same Line
+  ```
+  Code Example
+  // Do
+  function someFunction() {
+  // code block
+  }
 
-```
-Code Example
-// Do
-function someFunction() {
-// code block
-}
-
-// Avoid
-function someFunction()
-{
-// code block
-}
-```
+  // Avoid
+  function someFunction()
+  {
+  // code block
+  }
+  ```
 - Commas must be placed at the end of the current line.
 
   ```
