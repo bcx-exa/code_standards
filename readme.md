@@ -142,11 +142,11 @@
       return new SuccessResponse("Got user",userData);
 
     }catch (e) {
-      throw new InternalServerError("Throw Error",e)
+      return new InternalServerError("Throw Error",e)
     }
   }
   ```
-
+- If you using helper or extention methods, those methods need to throw errors and not return
 
 ## Style Guide
 
@@ -244,6 +244,8 @@
     @PrimaryGeneratedColumn("uuid")
     uuid: string;
 
+    //Your data model
+
     @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
     dateCreated: string;
 
@@ -273,3 +275,22 @@
 
   ```
 
+If you need to do run a transaction
+```
+const connect = await auroraConnectApi(databases);
+const queryRunner = connect.createQueryRunner();
+await queryRunner.startTransaction();
+try {
+    //Do all code that must run together
+      //const repo_walletHold = await queryRunner.manager.getRepository(walletHold);
+      //walletHold wall = new walletHold();
+      //repo_walletHold.save(wall);
+    await queryRunner.commitTransaction();
+} catch (err) {
+    await queryRunner.rollbackTransaction();
+    return "No Funds"
+} finally {
+    await queryRunner.release();
+    return "Processed Filfulment"
+}
+```
