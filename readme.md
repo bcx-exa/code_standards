@@ -294,3 +294,35 @@ try {
     return "Processed Filfulment"
 }
 ```
+
+## Recommend VS Code Plugins
+
+https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer-2
+
+https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens
+
+https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
+
+https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
+
+## Other Nice to haves
+
+https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-rename-tag
+
+https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker
+
+https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme
+
+https://marketplace.visualstudio.com/items?itemName=wix.vscode-import-cost
+
+https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments
+
+https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow
+
+
+
+
+
+
+
+
