@@ -21,7 +21,7 @@
 
 ## General
 
-- Wrap common utilities into the bcx shared libary npm package, ie encrytion,database connections
+- Wrap common utilities into the bcx shared libary npm package, ie encrytion,database connections.
 
 - Code should be well documented
   The code should be properly commented for understanding easily. Comments regarding the statements increase the understandability of the code.
