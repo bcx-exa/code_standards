@@ -19,7 +19,18 @@
 |     /src/services     |                                                               App Logic                                                                |
 |        /tests         |                                                             App Unit Tests                                                             |
 
+### Formats
+
+- Dates : YYYY/MM/DD - 2019/01/23
+
+- Time: HH:MM:SS - 23:13:32
+
+- Currency : Two decimal Point (Dot/Point not comma) - R 1 000 000.00
+
+- Phone Number: +## (###) ### ### - +27 (072) 999 9999
 ## General
+
+
 
 - Wrap common utilities into the bcx shared libary npm package, ie encrytion,database connections.
 
@@ -27,6 +38,7 @@
   The code should be properly commented for understanding easily. Comments regarding the statements increase the understandability of the code.
 
 - No unused variables.
+
 
 - Require or import statements at the beginning of each file, before and outside of any functions.
 
