@@ -268,6 +268,13 @@
     isDeleted: boolean;
   }
   ```
+- If there is a field that is optional, please ensure you indicate that in the model.  This will indicate to Typeorm that the field is optional, thus configuring the database to   accept nulls for that field.
+  
+  ```
+    // Field in Database accepting null
+    @Column({ type: "string" })
+    reason?: string;
+  ```
 
 - Database record should never be deleted, only flagged as deleted (use the isDeleted Field), exceptions are allowed but needs to be discussed.
   ```
