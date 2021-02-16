@@ -343,6 +343,14 @@ https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow
 How to to advanced filter using typeorm -> https://orkhan.gitbook.io/typeorm/docs/find-options
 
 
+## How to nuke an aws account
+
+1. Install docker desktop
+2. docker pull rebuy/aws-nuke
+3. Create nuke.yml file, see example in codebase
+4. docker run --rm -it -v C:\Projects\freedat\aws-nuke\nuke.yml:/home/aws-nuke/config.yml -v C:\Users\MartinG\.aws:/home/aws-nuke/.aws rebuy/aws-nuke:latest --profile freedatold1 --config /home/aws-nuke/config.yml
+
+> You should change the directories in the docker run command to match your file system.
 
 
 
