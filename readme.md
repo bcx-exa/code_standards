@@ -352,6 +352,8 @@ How to to advanced filter using typeorm -> https://orkhan.gitbook.io/typeorm/doc
 
 > You should change the directories in the docker run command to match your file system.
 
+5. docker run --rm -it -v C:\Projects\freedat\aws-nuke\nuke.yml:/home/aws-nuke/config.yml -v C:\Users\MartinG\.aws:/home/aws-nuke/.aws rebuy/aws-nuke:latest --profile freedatold1 --config /home/aws-nuke/config.yml --no-dry-run
+
 
 
 
